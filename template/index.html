@@ -1,0 +1,105 @@
+{% extends '../layout/layout.html' %}
+{% block title %}Response Web{% endblock %}
+
+{% block js %}
+<script src="./js/index.js"></script>
+{% endblock %}
+{% block content %}
+<div class="content">
+	<ol class="breadcrumb">
+	  <li><a href="#">Home</a></li>
+	  <li class="active">Html</li>
+	</ol>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Dialog</h3>
+  </div>
+  <div class="panel-body">
+	<button id="showDialog" class="button button-info">Show Dialog</button>
+</div>
+</div>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Table</h3>
+  </div>
+  <div class="panel-body">
+	<table class="table table-bordered table-striped">
+	  <thead>
+	    <tr>
+	      <th>a</th>
+	      <th>b</th>
+	      <th>c</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td>001</td>
+	      <td>002</td>
+	      <td>003</td>
+	    </tr>
+	    <tr>
+	      <td>001</td>
+	      <td>002</td>
+	      <td>003</td>
+	    </tr>
+	    <tr>
+	      <td>001</td>
+	      <td>002</td>
+	      <td>003</td>
+	    </tr>
+	  </tbody>
+	</table>
+
+  </div>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Grid</h3>
+	</div>
+</div>
+	<div class="grid">
+		<div class="col-1-3">col-1-3</div>
+		<div class="col-1-3">col-1-3</div>
+		<div class="col-1-3">col-1-3</div>
+
+		<div class="col-1-3 push-1-3">col-1-3 push-1-3</div>
+		<div class="col-1-3">col-1-3</div>
+
+		<div class="lg-col-1 col-1-3">col-1-3 lg-col-1</div>
+		<div class="lg-col-1-2 col-1-3">col-1-3 lg-col-1-2</div>
+		<div class="lg-col-1-2 col-1-3">col-1-3 lg-col-1-2</div>
+
+		<div class="col-1-3 push-1-3 lg-col-1-2 lg-push-1-2">col-1-3 push-1-3 lg-col-1-2 lg-push-1-2</div>
+		<div class="col-1-3 lg-col-1">col-1-3 lg-col-1</div>
+	</div>
+
+	<div id="dialog" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close">×</button>
+                    <h4 class="modal-title">New message to @fat</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form form-stacked">
+                        <label for="recipient-name" class="control-label">Recipient:</label>
+                        <input class="input-1" type="text" id="recipient-name">
+                        <label for="message-text" class="control-label">Message:</label>
+                        <textarea class="input-1" id="message-text"></textarea>
+                    </form>
+                </div>
+                <div class="modal-footer">
+<!--                     <div class="button-group">
+                        <button class="button button-primary">确定</button>
+                        <button class="button button-danger">关闭</button>
+                        <button class="button button-warning">取消</button>
+                    <	/div>
+ -->                <button id="close" type="button" class="button">Close</button>
+                    <button type="button" class="button button-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="overlay" class="modal-backdrop fade" style="display: none;"></div>
+{% endblock %}
