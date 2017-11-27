@@ -19,5 +19,6 @@
 
 ### 使用
 ```bash
+	npm install
 	npm run build
 ```
