@@ -16,3 +16,8 @@
 * 图标fontello
 * 字体reboto
 * 基础样式base.css
+
+### 使用
+```bash
+	npm run build
+```
