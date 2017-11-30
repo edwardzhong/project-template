@@ -89,7 +89,7 @@ scripts.map(name=>{
             .bundle()  //merge
             .pipe(source(name+'.js'))
             .pipe(buffer())
-            // .pipe(uglify())
+            .pipe(uglify())
             // .pipe(rename({suffix: '.bundle'}))// rename the file
             .pipe(sourcemaps.init({loadMaps: true})) //External sourcemap file
             .pipe(sourcemaps.write('./'))
