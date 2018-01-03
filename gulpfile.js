@@ -29,7 +29,7 @@ gulp.task('less', function () {
 
 //清除输出文件夹
 gulp.task('clean', function(cb) {
-    return del(['./dist','./rev'], cb);
+    return del(['./dist','./rev','./*.html'], cb);
 });
 
 //复制公共库目录下的所有内容
