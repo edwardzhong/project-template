@@ -29,7 +29,7 @@ gulp.task('less', function () {
 
 //清除输出文件夹
 gulp.task('clean', function(cb) {
-    return del(['./dist','./rev','./*.html'], cb);
+    return del(['./dist','./rev','./html'], cb);
 });
 
 //复制公共库目录下的所有内容
@@ -48,7 +48,7 @@ gulp.task('css', function() {
                 // "browsers": ["last 2 version", "> 0.1%"]
             })
         ]))
-        .pipe(cleanCSS())
+        .pipe(cleanCSS())//压缩合并
         // .pipe(rename({suffix: '.min'}))
         // .pipe(gulp.dest('./dist/css'));
         .pipe(rev())
@@ -60,10 +60,9 @@ gulp.task('css', function() {
 
 // gulp.task('js',function(){
 //     return gulp.src('./js/*.js')
-//         .pipe(concatJS('index.js'))
-//         .pipe(uglify())
-//         .pipe(rename({suffix: '.min'}))
-//         // .pipe(gulp.dest('./dist/js'));
+//         .pipe(concatJS('index.js'))//合并
+//         .pipe(uglify())//压缩,不能压缩es6
+//         .pipe(rename({suffix: '.min'}))//重命名后rev文件名不匹配
 
 //         .pipe(rev())
 //         .pipe(gulp.dest('./dist/js'))
@@ -86,11 +85,11 @@ scripts.map(name=>{
                     'stage-0'  //es7
                 ]
             })
-            .bundle()  //merge
+            .bundle()  //合并
             .pipe(source(name+'.js'))
             .pipe(buffer())
-            .pipe(uglify())
-            // .pipe(rename({suffix: '.bundle'}))// rename the file
+            .pipe(uglify())//压缩
+            // .pipe(rename({suffix: '.bundle'}))// 重命名后rev文件名不匹配
             .pipe(sourcemaps.init({loadMaps: true})) //External sourcemap file
             .pipe(sourcemaps.write('./'))
             .pipe(rev())
@@ -106,12 +105,12 @@ gulp.task('html', function() {
     .pipe(swig({
         defaults: {cache: false }
     }))
-    .pipe(gulp.dest('./'))
+    .pipe(gulp.dest('./html'))
 });
 
 //更新css和js版本，同时替换html中的链接标签
 gulp.task('rev', scripts.concat(["css","html"]),function () {
-    return gulp.src(['./rev/**/*.json', './*.html'])//add md5 suffix to js and css file, replace the link of html as well 
+    return gulp.src(['./rev/**/*.json', './html/*.html'])//add md5 suffix to js and css file, replace the link of html as well 
         .pipe( revCollector({
             replaceReved: true,
             dirReplacements: {
