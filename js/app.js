@@ -1,6 +1,5 @@
-// import $ from 'zepto' //zepto没有用 CommonJs 规范的方法 module.exports 来导出模块
-require('../lib/zepto.js');
-import { webApp } from '../lib/app/app.js';
+import $ from '../lib/zepto.js';//zepto没有用 CommonJs 规范的方法 module.exports 来导出模块
+import webApp from '../lib/app/app.js';
 
 var App=webApp({
 	container:'app',

@@ -2,17 +2,30 @@
 @lightGreen:hsl(153, 47%, 49%);
 @gray:hsl(0, 0%, 47%);
 
+.dprfont(@size: 14px) {
+    font-size: @size;
+    [data-dpr="2"] & {
+        font-size: @size*2;
+    }
+    [data-dpr="3"] & {
+        font-size: @size*3;
+    }
+}
+
 // base
 html,body{
-  font-family: "Roboto","Droid Sans","Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
-  font-size: 0.25rem;
+  // font-family: "Roboto","Droid Sans","Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC","Helvetica Neue",STHeiti,"Microsoft Yahei",Tahoma,Simsun,sans-serif;
+  .dprfont(14px);
+  box-sizing: border-box;
   color: #555;
   width: 100%;
   height: 100%;
-  user-select: none;
-  -webkit-text-size-adjust:100%;
-  -webkit-tap-highlight-color:transparent;
-  font-size-adjust: 100%
+  line-height: 1.6;
+  user-select: none;//文本不能选择
+  -webkit-text-size-adjust: 100%;//关闭字体大小自动调整功能(iPhone 和 Android 的浏览器纵向 (Portrate mode) 和橫向 (Landscape mode) 模式皆有自动调整字体大小的功能)
+  -webkit-tap-highlight-color: transparent;//消除ios点击后的背景
+  font-size-adjust: 100%;
 }
 body,p,h1,h2,h3,h4,h5,h6{margin:0;}
 ul,ol{list-type:none; margin:0; padding:0;}
@@ -30,7 +43,7 @@ input, textarea {
 }
 
 img,a{
-  -webkit-touch-callout:none;
+  -webkit-touch-callout: none;//禁止系统默认菜单
 }
 
 // layout
@@ -45,7 +58,7 @@ img,a{
     background-color: #2EABDF;
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
     color:#fff;
-    font-size: 0.4rem;
+    .dprfont(15px);
     font-weight: bold;
     text-align: center;
     z-index: 99;
@@ -128,14 +141,14 @@ img,a{
   text-align: center;
   z-index: 1000;
   .dialog-title{
-    font-size: 0.35rem;
+    .dprfont(15px);
     padding: 0.2rem;
     h3{
       margin: 0;
     }
   }
   .dialog-text{
-    font-size:0.32rem;
+    .dprfont(14px);
     margin: 0;
     padding: 0.2rem;
   }
@@ -148,7 +161,7 @@ img,a{
     border-top: 1px solid #eee;
     .confirm,.cancel{
       display: block;
-      font-size: 0.32rem;
+      .dprfont(14px);
       padding: 0 0.2rem;
       font-weight: bold;
       cursor: pointer;

@@ -1,3 +1,12 @@
+.dprfont(@size: 14px) {
+    font-size: @size;
+    [data-dpr=2] & {
+        font-size: @size*2;
+    }
+    [data-dpr=3] & {
+        font-size: @size*3;
+    }
+}
 html,
 body {
   font-family: "Roboto", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
@@ -5,9 +14,9 @@ body {
   color: #555;
   width: 100%;
   height: 100%;
-  user-select: none;
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: transparent;
+  user-select: none;//文本不能选择
+  -webkit-text-size-adjust: 100%;//关闭字体大小自动调整功能(iPhone 和 Android 的浏览器纵向 (Portrate mode) 和橫向 (Landscape mode) 模式皆有自动调整字体大小的功能)
+  -webkit-tap-highlight-color: transparent;//消除ios点击后的背景
   font-size-adjust: 100%;
 }
 body,
@@ -41,7 +50,7 @@ textarea {
 }
 img,
 a {
-  -webkit-touch-callout: none;
+  -webkit-touch-callout: none;//禁止系统默认菜单
 }
 .header {
   display: block;

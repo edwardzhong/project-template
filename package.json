@@ -6,6 +6,7 @@
     "lib": "lib"
   },
   "scripts": {
+    "dev": "gulp dev",
     "build": "gulp",
     "clean": "gulp clean",
     "less": "gulp less"
@@ -37,12 +38,13 @@
     "gulp-less": "^3.3.0",
     "gulp-postcss": "^6.3.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.1.0",
     "gulp-rev": "^7.1.2",
     "gulp-rev-collector": "^1.1.1",
-    "gulp-swig": "^0.8.0",
-    "gulp-watch": "^4.3.11",
+    "gulp-serve": "^1.4.0",
     "gulp-sourcemaps": "^2.6.0",
+    "gulp-swig": "^0.8.0",
+    "gulp-uglify": "^2.1.0",
+    "gulp-watch": "^4.3.11",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   }

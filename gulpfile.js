@@ -13,10 +13,11 @@ var rev = require('gulp-rev');// add md5 suffix to the file
 var revCollector = require('gulp-rev-collector');  
 var swig = require('gulp-swig');
 var browserify = require('browserify');
-var source = require("vinyl-source-stream");
+var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var babelify = require('babelify');
 var sourcemaps  = require('gulp-sourcemaps');
+var serve = require('gulp-serve');
 
 //实时监控less转换为css
 gulp.task('less', function () {
@@ -29,7 +30,7 @@ gulp.task('less', function () {
 
 //清除输出文件夹
 gulp.task('clean', function(cb) {
-    return del(['./dist','./rev','./html'], cb);
+    return del(['./dist','./rev','./html','*.html'], cb);
 });
 
 //复制公共库目录下的所有内容
@@ -42,10 +43,10 @@ gulp.task('copy',function(){
 gulp.task('css', function() {
     return gulp.src('./less/*.less')
         .pipe(less())
-        // .pipe(concatCss("index.css"))
+        // .pipe(concatCss('index.css'))
         .pipe(postcss([ autoprefixer({
-                "browsers": ["last 2 version", "> 0.5%", "ie 6-8","Firefox < 20"]
-                // "browsers": ["last 2 version", "> 0.1%"]
+                'browsers': ['last 2 version', '> 0.5%', 'ie 6-8','Firefox < 20']
+                // 'browsers': ['last 2 version', '> 0.1%']
             })
         ]))
         .pipe(cleanCSS())//压缩合并
@@ -79,7 +80,7 @@ scripts.map(name=>{
                 debug:true // set true so the bundle file can generate sourcemap 
             })
             .transform(babelify,{  // same as the .babelrc
-                plugins: ["transform-runtime"],
+                plugins: ['transform-runtime'],
                 presets: [
                     'es2015',  //convert to es5
                     'stage-0'  //es7
@@ -103,13 +104,32 @@ scripts.map(name=>{
 gulp.task('html', function() {
   return gulp.src('./template/*.html')
     .pipe(swig({
+        data:{env:'dev'},
+        defaults: {cache: false }
+    }))
+    .pipe(gulp.dest('./'))
+});
+
+gulp.task('html-build', function() {
+  return gulp.src('./template/*.html')
+    .pipe(swig({
         defaults: {cache: false }
     }))
     .pipe(gulp.dest('./html'))
 });
 
+//启动服务器
+gulp.task('serve', serve({
+    root:'./',
+    port:3001
+}));
+gulp.task('serve-build', serve({
+    root:'dist',
+    port:3001
+}));
+
 //更新css和js版本，同时替换html中的链接标签
-gulp.task('rev', scripts.concat(["css","html"]),function () {
+gulp.task('rev', scripts.concat(['css','html-build']),function () {
     return gulp.src(['./rev/**/*.json', './html/*.html'])//add md5 suffix to js and css file, replace the link of html as well 
         .pipe( revCollector({
             replaceReved: true,
@@ -121,4 +141,5 @@ gulp.task('rev', scripts.concat(["css","html"]),function () {
         .pipe( gulp.dest('./dist') );
 });
 
-gulp.task("default", ['copy','rev']);
+gulp.task('dev', scripts.concat(['css','html','serve']));
+gulp.task('default', ['copy','rev','serve-build']);
